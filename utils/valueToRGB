@@ -1,0 +1,46 @@
+//structure containing three color components expressed in double type (preferably from 0.0 to 1.0)
+struct RGB {
+	double r;
+	double g;
+	double b;
+};
+
+//function assigning RGB-type value based on highest value in some subset of double-typed data
+//returns structure of color components
+//colors are assigned to values in ascending order going from blue through green to red
+RGB valueToRGB(double value, double highestValue)
+{
+	RGB colors;
+	colors.r = 0;
+	colors.g = 0;
+	colors.b = 0;
+	if (value < highestValue*0.25)
+	{
+		colors.b = 1.0;
+		colors.g = 4 * value / highestValue;
+		colors.r = 0;
+		return colors;
+	}
+	if (value < highestValue*0.5)
+	{
+		colors.b = 2 - 4 * value / highestValue;
+		colors.g = 1.0;
+		colors.r = 0;
+		return colors;
+	}
+	if (value < highestValue*0.75)
+	{
+		colors.b = 0;
+		colors.g = 1.0;
+		colors.r = 4 * value / highestValue - 2;
+		return colors;
+	}
+	if (value <= highestValue)
+	{
+		colors.b = 0;
+		colors.g = 4 - 4 * value / highestValue;
+		colors.r = 255;
+		return colors;
+	}
+	return colors;
+}
